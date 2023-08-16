@@ -8,9 +8,9 @@ const port = process.env.PORT || 8000
 
 app.use(express.json())
 
-const getAllController = new GetAllController()
+const getAllController = new GetAllController();
 
-app.get('/', getAllController.handle)
+app.get('/', getAllController.handle);
 
 app.listen(port, () => {
   console.log(`Server is online -> http://localhost:${port}`)
