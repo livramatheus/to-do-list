@@ -1,0 +1,10 @@
+- TDD
+- Unit Tests (jest)
+- Linting (eslint)
+- TypeScript
+- Test and Production environments
+- Dependency injection
+- Continuous Integration (CI) with GitHub Actions
+  - Unit Tests
+  - Lint
+- Continuous Deployment to Railway (CD) with GitHub Actions
