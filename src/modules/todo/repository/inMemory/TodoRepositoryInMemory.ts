@@ -7,6 +7,12 @@ class TodoRepositoryInMemory implements ITodoRepository {
   async getAll(): Promise<ToDoItem[]> {
     return this.data
   }
+
+  async newItem(item: ToDoItem): Promise<ToDoItem> {
+    this.data.push(item)
+
+    return item
+  }
 }
 
 export default TodoRepositoryInMemory
