@@ -10,8 +10,8 @@ class NewItemUseCase {
     @inject('TodoRepository') private todoRepository: ITodoRepository,
   ) {}
 
-  async execute(todoRepository: ITodoItem): Promise<ITodoItem> {
-    const result = await this.todoRepository.newItem(todoRepository)
+  async execute(todoItem: ITodoItem): Promise<ITodoItem> {
+    const result = await this.todoRepository.newItem(todoItem)
     return result
   }
 }
