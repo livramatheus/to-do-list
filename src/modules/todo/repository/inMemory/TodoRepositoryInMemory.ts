@@ -13,6 +13,19 @@ class TodoRepositoryInMemory implements ITodoRepository {
 
     return item
   }
+
+  async delete(id: string): Promise<boolean> {
+    let deleted = false
+
+    this.data.forEach((item, index) => {
+      if (item.id === id) {
+        this.data.splice(index, 1)
+        deleted = true
+      }
+    })
+
+    return deleted
+  }
 }
 
 export default TodoRepositoryInMemory
