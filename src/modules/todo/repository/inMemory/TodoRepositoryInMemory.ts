@@ -26,6 +26,17 @@ class TodoRepositoryInMemory implements ITodoRepository {
 
     return deleted
   }
+
+  async toggle(id: string): Promise<ToDoItem | boolean> {
+    const element = this.data.find((item) => item.id === id)
+
+    if (element) {
+      element.done = !element.done
+      return element
+    }
+
+    return false
+  }
 }
 
 export default TodoRepositoryInMemory
