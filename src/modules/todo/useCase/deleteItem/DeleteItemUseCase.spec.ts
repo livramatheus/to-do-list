@@ -45,7 +45,7 @@ describe('Delete Item', () => {
     expect(all).toHaveLength(1)
   })
 
-  it('should be able to identify the deletion of a non existing item', async () => {
+  it('should be able to identify a deletion attempt on a non-existing item', async () => {
     const result = await deleteItemUseCase.execute('9999')
     expect(result).toBeFalsy()
   })
