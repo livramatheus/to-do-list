@@ -4,4 +4,5 @@ export default interface ITodoRepository {
   getAll(): Promise<ITodoItem[]>
   newItem(item: ITodoItem): Promise<ITodoItem>
   delete(id: string): Promise<boolean>
+  toggle(id: string): Promise<ITodoItem | boolean>
 }
