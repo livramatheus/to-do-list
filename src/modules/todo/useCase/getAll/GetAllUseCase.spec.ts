@@ -1,4 +1,4 @@
-import ITodoRepository from '../../repository/ITodoRepository'
+import { ITodoRepository } from '../../repository/ITodoRepository'
 import TodoRepositoryInMemory from '../../repository/inMemory/TodoRepositoryInMemory'
 import GetAllUseCase from './GetAllUseCase'
 
