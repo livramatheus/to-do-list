@@ -1,5 +1,5 @@
 import { v4 as uuid } from 'uuid'
-import ITodoRepository from '../../repository/ITodoRepository'
+import { ITodoRepository } from '../../repository/ITodoRepository'
 import TodoRepositoryInMemory from '../../repository/inMemory/TodoRepositoryInMemory'
 import NewItemUseCase from '../newItem/NewItemUseCase'
 import DeleteItemUseCase from './DeleteItemUseCase'

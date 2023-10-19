@@ -1,7 +1,7 @@
 /* eslint no-useless-constructor: "off" */
 
 import { inject, injectable } from 'tsyringe'
-import ITodoRepository from '../../repository/ITodoRepository'
+import { ITodoRepository } from '../../repository/ITodoRepository'
 import ITodoItem from '../../dto/IToDoItem'
 
 @injectable()

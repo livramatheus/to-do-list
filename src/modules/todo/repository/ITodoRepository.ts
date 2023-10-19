@@ -1,8 +1,16 @@
-import ITodoItem from '../dto/IToDoItem'
+import IToDoItem from '../dto/IToDoItem'
 
-export default interface ITodoRepository {
-  getAll(): Promise<ITodoItem[]>
-  newItem(item: ITodoItem): Promise<ITodoItem>
-  delete(id: string): Promise<boolean>
-  toggle(id: string): Promise<ITodoItem | boolean>
+interface IEditItem {
+  id: string
+  name: string
 }
+
+interface ITodoRepository {
+  getAll(): Promise<IToDoItem[]>
+  newItem(item: IToDoItem): Promise<IToDoItem>
+  delete(id: string): Promise<boolean>
+  toggle(id: string): Promise<IToDoItem | boolean>
+  edit(data: IEditItem): Promise<IToDoItem | boolean>
+}
+
+export { IEditItem, ITodoRepository }

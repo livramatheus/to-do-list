@@ -1,7 +1,7 @@
 // use case para processar as operações
 // repositorio para alimentar o construtor do use case
 import { v4 as uuid } from 'uuid'
-import ITodoRepository from '../../repository/ITodoRepository'
+import { ITodoRepository } from '../../repository/ITodoRepository'
 import TodoRepositoryInMemory from '../../repository/inMemory/TodoRepositoryInMemory'
 import NewItemUseCase from './NewItemUseCase'
 import IToDoItem from '../../dto/IToDoItem'

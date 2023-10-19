@@ -1,5 +1,5 @@
 import ToDoItem from '../../dto/IToDoItem'
-import ITodoRepository from '../ITodoRepository'
+import { IEditItem, ITodoRepository } from '../ITodoRepository'
 
 class TodoRepositoryInMemory implements ITodoRepository {
   data: ToDoItem[] = []
@@ -29,9 +29,18 @@ class TodoRepositoryInMemory implements ITodoRepository {
 
   async toggle(id: string): Promise<ToDoItem | boolean> {
     const element = this.data.find((item) => item.id === id)
-
     if (element) {
       element.done = !element.done
+      return element
+    }
+
+    return false
+  }
+
+  async edit(data: IEditItem): Promise<boolean | ToDoItem> {
+    const element = this.data.find((item) => item.id === data.id)
+    if (element) {
+      element.name = data.name
       return element
     }
 

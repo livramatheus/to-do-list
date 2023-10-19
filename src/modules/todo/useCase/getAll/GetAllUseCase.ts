@@ -2,7 +2,7 @@
 
 import { inject, injectable } from 'tsyringe'
 import ITodoItem from '../../dto/IToDoItem'
-import ITodoRepository from '../../repository/ITodoRepository'
+import { ITodoRepository } from '../../repository/ITodoRepository'
 
 @injectable()
 class GetAllUseCase {
