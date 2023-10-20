@@ -44,7 +44,7 @@ jobs:
         run: npm i -g @railway/cli
 
       - name: Deploy to Test Environment
-        run: railway up
+        run: railway up --service 57b27deb-61c1-46cb-a388-72121904a98a
         if: github.ref == 'refs/heads/test'
         env:
           RAILWAY_TOKEN: ${{ secrets.TEST_ACTIONS_TOKEN }}
