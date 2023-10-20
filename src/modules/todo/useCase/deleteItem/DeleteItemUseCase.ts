@@ -1,8 +1,7 @@
 /* eslint no-useless-constructor: "off" */
 
 import { inject, injectable } from 'tsyringe'
-import ITodoRepository from '../../repository/ITodoRepository'
-
+import { ITodoRepository } from '../../repository/ITodoRepository'
 @injectable()
 class DeleteItemUseCase {
   constructor(
