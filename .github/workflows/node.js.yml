@@ -50,7 +50,7 @@ jobs:
           RAILWAY_TOKEN: ${{ secrets.TEST_ACTIONS_TOKEN }}
 
       - name: Deploy to Production Environment
-        run: railway up
+        run: railway up --service 57b27deb-61c1-46cb-a388-72121904a98a
         if: github.ref == 'refs/heads/main'
         env:
           RAILWAY_TOKEN: ${{ secrets.PRODUCTION_ACTIONS_TOKEN }}
