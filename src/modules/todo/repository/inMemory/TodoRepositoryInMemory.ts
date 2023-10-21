@@ -15,16 +15,16 @@ class TodoRepositoryInMemory implements ITodoRepository {
   }
 
   async delete(id: string): Promise<boolean> {
-    let deleted = false
-
-    this.data.forEach((item, index) => {
-      if (item.id === id) {
-        this.data.splice(index, 1)
-        deleted = true
-      }
+    const newArray = this.data.filter((item) => {
+      return item.id !== id
     })
 
-    return deleted
+    if (newArray.length < this.data.length) {
+      this.data = newArray
+      return true
+    }
+
+    return false
   }
 
   async toggle(id: string): Promise<ToDoItem | boolean> {
