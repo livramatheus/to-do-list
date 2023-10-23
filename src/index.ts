@@ -21,7 +21,7 @@ const editItemController = new EditItemController()
 app.get('/', getAllController.handle)
 app.post('/', newItemController.handle)
 app.delete('/', deleteItemController.handle)
-app.patch('/', toggleItemController.handle)
+app.patch('/toggle', toggleItemController.handle)
 app.patch('/edit', editItemController.handle)
 
 app.listen(port, () => {
