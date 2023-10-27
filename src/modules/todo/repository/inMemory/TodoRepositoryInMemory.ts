@@ -1,11 +1,20 @@
 import ToDoItem from '../../dto/IToDoItem'
-import { IEditItem, ITodoRepository } from '../ITodoRepository'
+import {
+  IDeleteItem,
+  IEditItem,
+  ITodoRepository,
+  IToggleItem,
+} from '../ITodoRepository'
 
 class TodoRepositoryInMemory implements ITodoRepository {
   data: ToDoItem[] = []
 
-  async getAll(): Promise<ToDoItem[]> {
-    return this.data
+  async getAll(user: string): Promise<ToDoItem[]> {
+    const items = this.data.filter((i) => {
+      return i.user === user
+    })
+
+    return items
   }
 
   async newItem(item: ToDoItem): Promise<ToDoItem> {
@@ -14,21 +23,30 @@ class TodoRepositoryInMemory implements ITodoRepository {
     return item
   }
 
-  async delete(id: string): Promise<boolean> {
-    const newArray = this.data.filter((item) => {
-      return item.id !== id
+  async delete(item: IDeleteItem): Promise<boolean> {
+    const itemsBelongToUser = await this.getAll(item.user)
+    const itemsDontBelongToUser = this.data.filter((i) => {
+      return i.user !== item.user
     })
 
-    if (newArray.length < this.data.length) {
-      this.data = newArray
-      return true
+    if (itemsBelongToUser) {
+      const newArray = itemsBelongToUser.filter((i) => {
+        return i.id !== item.id
+      })
+
+      if (newArray.length < itemsBelongToUser.length) {
+        this.data = [...newArray, ...itemsDontBelongToUser]
+        return true
+      }
     }
 
     return false
   }
 
-  async toggle(id: string): Promise<ToDoItem | boolean> {
-    const element = this.data.find((item) => item.id === id)
+  async toggle(data: IToggleItem): Promise<ToDoItem | boolean> {
+    const itemsBelongToUser = await this.getAll(data.user)
+    const element = itemsBelongToUser.find((i) => i.id === data.id)
+
     if (element) {
       element.done = !element.done
       return element
@@ -38,7 +56,9 @@ class TodoRepositoryInMemory implements ITodoRepository {
   }
 
   async edit(data: IEditItem): Promise<boolean | ToDoItem> {
-    const element = this.data.find((item) => item.id === data.id)
+    const itemsBelongToUser = await this.getAll(data.user)
+    const element = itemsBelongToUser.find((i) => i.id === data.id)
+
     if (element) {
       element.name = data.name
       return element
