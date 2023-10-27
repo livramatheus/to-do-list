@@ -10,6 +10,8 @@ import GetAllUseCase from '../getAll/GetAllUseCase'
 let newItemUseCase: NewItemUseCase
 let getAllUseCase: GetAllUseCase
 let todoRepository: ITodoRepository
+const userId1 = uuid()
+const userId2 = uuid()
 
 describe('New Item', () => {
   beforeEach(() => {
@@ -18,27 +20,38 @@ describe('New Item', () => {
     getAllUseCase = new GetAllUseCase(todoRepository)
   })
 
-  it('should be able to create a new item', async () => {
+  it('should be able to create a new item assigned to an user', async () => {
     const item1: IToDoItem = {
       id: uuid(),
       name: 'Dummy Note 1',
       done: false,
+      user: userId1,
     }
 
     const item2: IToDoItem = {
       id: uuid(),
       name: 'Dummy Note 2',
       done: false,
+      user: userId1,
     }
 
-    const allItems = await getAllUseCase.execute()
-    expect(allItems).toHaveLength(0)
+    const item3: IToDoItem = {
+      id: uuid(),
+      name: 'Dummy Note 3',
+      done: false,
+      user: userId2,
+    }
 
     const result1 = await newItemUseCase.execute(item1)
-    expect(result1).toHaveProperty('id')
-    expect(allItems).toHaveLength(1)
-
     await newItemUseCase.execute(item2)
-    expect(allItems).toHaveLength(2)
+    expect(result1).toHaveProperty('id')
+
+    const result3 = await newItemUseCase.execute(item3)
+    expect(result3).toHaveProperty('id')
+
+    const allItems1 = await getAllUseCase.execute(userId1)
+    const allItems2 = await getAllUseCase.execute(userId2)
+    expect(allItems1).toHaveLength(2)
+    expect(allItems2).toHaveLength(1)
   })
 })

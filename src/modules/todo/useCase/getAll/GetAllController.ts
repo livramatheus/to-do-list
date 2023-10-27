@@ -3,11 +3,14 @@ import { container } from 'tsyringe'
 import GetAllUseCase from './GetAllUseCase'
 
 class GetAllController {
-  async handle(request: Request, response: Response): Promise<Response> {
+  async handle(request: Request, response: Response): Promise<Response | void> {
     const getAllUseCase = container.resolve(GetAllUseCase)
-    const items = await getAllUseCase.execute()
+    const user = request.user
 
-    return response.json(items)
+    if (user) {
+      const items = await getAllUseCase.execute(user)
+      return response.json(items)
+    }
   }
 }
 

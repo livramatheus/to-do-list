@@ -10,8 +10,8 @@ class GetAllUseCase {
     @inject('TodoRepository') private todoRepository: ITodoRepository,
   ) {}
 
-  async execute(): Promise<ITodoItem[]> {
-    const items = await this.todoRepository.getAll()
+  async execute(user: string): Promise<ITodoItem[]> {
+    const items = await this.todoRepository.getAll(user)
 
     return items
   }
